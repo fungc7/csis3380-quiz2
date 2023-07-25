@@ -5,7 +5,7 @@ const { Schema, model } = mongoose;
 const app = express();
 app.use(express.json());
 
-const uri = "mongodb+srv://tempuser:123@cluster0.cvrdzvp.mongodb.net/Exam";
+const uri = "mongodb+srv://tempuser:123@cluster0.f9d6o.gcp.mongodb.net/Exam";
 
 const data = [
     { name : "Ivan Fung",
@@ -42,6 +42,17 @@ app.get("/", async (req, res, next) => {
         })
         res.status(204).end();
     } catch(err){
+        next(err);
+    }
+})
+
+app.get("/test", async (req, res, next) => {
+    try {
+        const records = await Stud.find({});
+        res.json(records);
+        res.status(204).end();
+    }
+    catch(err) {
         next(err);
     }
 })
